@@ -31,11 +31,11 @@ def kubey(state):
 def monitor(state: int):
     """Check current state of system"""
     while True:
-        if len(active_children()) < state:
+        if get_state() < state:
             logger.awaiting(
-                "awaiting reconciliation system state: %d with desired state: %d" % (len(active_children()), state)
+                "awaiting reconciliation system state: %d with desired state: %d" % (get_state(), state)
             )
-        elif len(active_children()) == state:
+        elif get_state() == state:
             logger.stable("STABLE: number of processes: %d" % (state))
 
         pids = ", ".join([str(obj.pid) for obj in active_children()])
@@ -59,6 +59,6 @@ if __name__ == '__main__':
     try:
         STATE = int(sys.argv[1])
     except:
-        print("Usage: python declarative.py <num. of processes>")
+        print("Usage: python imperative.py <num. of processes>")
         sys.exit(0)
     app.run(port=8080)
