@@ -1,5 +1,7 @@
 # Imperative vs. Declarative Systems
 
+You can find the talk where this demo was used [here](https://www.youtube.com/watch?v=nz99WrdgRuA&feature=youtu.be)!
+
 ## Running the demos
 
 ### Declarative System
