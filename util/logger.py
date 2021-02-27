@@ -72,6 +72,7 @@ def setup_logging():
         'stable',
         lambda message, *args: logger._log(logging.STABLE, message, args)
     )
+
     setattr(
         logger,
         'reconcile',

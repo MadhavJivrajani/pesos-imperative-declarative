@@ -13,6 +13,9 @@ app = flask.Flask(__name__)
 logger = setup_logging()
 STATE = 2
 
+def get_state():
+    return len(active_children())
+
 @app.route("/spawn", methods=["GET"])
 def processor():
     spawn()
@@ -20,7 +23,10 @@ def processor():
 
 @app.route("/init", methods=["GET"])
 def init():
-    monitor(STATE)
+    kubey(STATE)
+
+def kubey(state):
+    monitor(state)
 
 def monitor(state: int):
     """Check current state of system"""
@@ -50,5 +56,9 @@ def do_some_processing():
         pass
 
 if __name__ == '__main__':
-    STATE = int(sys.argv[1])
+    try:
+        STATE = int(sys.argv[1])
+    except:
+        print("Usage: python declarative.py <num. of processes>")
+        sys.exit(0)
     app.run(port=8080)

@@ -8,6 +8,9 @@ from multiprocessing import active_children
 
 logger = setup_logging()
 
+def get_state():
+    return len(active_children())
+
 def processor(command):
     """Execute a command provided by the controller"""
     command()
@@ -17,12 +20,12 @@ def monitor(state: int):
     and issue appropriate commands to the processor
     to reconcile current state with reconciled state.
     """
-    if len(active_children()) < state:
+    if get_state() < state:
         logger.reconcile(
-            "attempting reconciling system state: %d with desired state: %d" % (len(active_children()), state)
+            "attempting reconciling system state: %d with desired state: %d" % (get_state(), state)
         )
         processor(spawn)
-    elif len(active_children()) == state:
+    elif get_state() == state:
         logger.stable("STABLE: number of processes: %d" % (state))
 
 def spawn():
@@ -51,9 +54,13 @@ def controller(state: int):
         )
         time.sleep(1)
         
-def main(state: int):
+def kubey(state: int):
     controller(state)
 
 if __name__ == '__main__':
-    state = int(sys.argv[1])
-    main(state)
+    try:
+        state = int(sys.argv[1])
+    except:
+        print("Usage: python declarative.py <num. of processes>")
+        sys.exit(0)
+    kubey(state)
