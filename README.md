@@ -34,7 +34,7 @@ Note that the state of the system reaches `STABLE` after you execute the `spawn`
 
 ## Resources
 - The slides for this talk can be found [here](https://github.com/MadhavJivrajani/pesos-imperative-declarative/blob/main/assets/Imperative%20vs%20Declarative%20Systems.pdf).
-- This talk was part of our community meetups at PESOS. Check out our community [here](https://pesos.github.io/)!
+- This talk was part of our community meetups at PES Open Source. Check out our community [here](https://pesos.github.io/)!
 
 ## Contributing
 - Feel free to extend this demo in any way you like! All you need to do is open an issue :smile:
