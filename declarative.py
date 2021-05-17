@@ -26,12 +26,12 @@ def monitor(state: int):
         )
         processor(spawn)
     elif get_state() == state:
-        logger.stable("STABLE: number of processes: %d" % (state))
+        logger.stable("number of processes: %d" % (state))
 
 def spawn():
     """Spawn new processes"""
     proc_obj = Process(target=do_some_processing)
-    logger.info("INFO: process spawned")
+    logger.info("process spawned")
     proc_obj.start()
 
 def do_some_processing():
@@ -50,7 +50,7 @@ def controller(state: int):
         monitor(state)
         pids = ", ".join([str(obj.pid) for obj in active_children()])
         logger.info(
-            "INFO: current PIDs: %s" % (pids)
+            "current PIDs: %s" % (pids)
         )
         time.sleep(1)
         
